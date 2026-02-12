@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signalforge.dev/schemas/report.v1.json",
+  "title": "SignalForge Report v1",
+  "description": "Full report output from the SignalForge pipeline",
+  "type": "object",
+  "required": ["metadata", "feeds", "clusters", "opportunities", "bestBet"],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["runId", "window", "createdAt", "provider", "model", "promptVersion", "evidencePackHash"],
+      "additionalProperties": false,
+      "properties": {
+        "runId": { "type": "string", "minLength": 1 },
+        "window": { "type": "string", "minLength": 1 },
+        "topic": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "provider": { "type": "string", "enum": ["openai", "anthropic"] },
+        "model": { "type": "string", "minLength": 1 },
+        "promptVersion": { "type": "string", "minLength": 1 },
+        "evidencePackHash": { "type": "string", "minLength": 1 },
+        "totalItemsCollected": { "type": "integer", "minimum": 0 },
+        "totalItemsAfterDedup": { "type": "integer", "minimum": 0 },
+        "totalItemsSentToAgent": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "feeds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/FeedStatus"
+      }
+    },
+    "clusters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Cluster"
+      }
+    },
+    "opportunities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Opportunity"
+      }
+    },
+    "bestBet": {
+      "$ref": "#/$defs/BestBet"
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "$defs": {
+    "GroundedClaim": {
+      "type": "object",
+      "required": ["claim", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "claim": { "type": "string", "minLength": 1 },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "snippets": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "PainSignal": {
+      "type": "object",
+      "required": ["id", "type", "statement", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": {
+          "type": "string",
+          "enum": ["complaint", "urgency", "workaround", "monetization", "buyer", "risk"]
+        },
+        "statement": { "type": "string", "minLength": 1 },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "snippets": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "ScoreFactor": {
+      "type": "object",
+      "required": ["score", "max"],
+      "additionalProperties": false,
+      "properties": {
+        "score": { "type": "number" },
+        "max": { "type": "number" }
+      }
+    },
+    "ScoreBreakdown": {
+      "type": "object",
+      "required": ["frequency", "painIntensity", "buyerClarity", "monetizationSignal", "buildSimplicity", "novelty"],
+      "additionalProperties": false,
+      "properties": {
+        "frequency": { "$ref": "#/$defs/ScoreFactor" },
+        "painIntensity": { "$ref": "#/$defs/ScoreFactor" },
+        "buyerClarity": { "$ref": "#/$defs/ScoreFactor" },
+        "monetizationSignal": { "$ref": "#/$defs/ScoreFactor" },
+        "buildSimplicity": { "$ref": "#/$defs/ScoreFactor" },
+        "novelty": { "$ref": "#/$defs/ScoreFactor" }
+      }
+    },
+    "Cluster": {
+      "type": "object",
+      "required": ["id", "label", "summary", "keyphrases", "itemIds", "painSignals"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "summary": { "$ref": "#/$defs/GroundedClaim" },
+        "keyphrases": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "itemIds": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "painSignals": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/PainSignal" }
+        },
+        "score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "rank": { "type": "integer", "minimum": 1 },
+        "scoreBreakdown": { "$ref": "#/$defs/ScoreBreakdown" },
+        "whyNow": { "$ref": "#/$defs/GroundedClaim" }
+      }
+    },
+    "Opportunity": {
+      "type": "object",
+      "required": ["id", "clusterId", "title", "description", "targetAudience", "painPoint", "monetizationModel", "mvpScope", "validationSteps", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "clusterId": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "targetAudience": { "type": "string", "minLength": 1 },
+        "painPoint": { "type": "string", "minLength": 1 },
+        "monetizationModel": { "type": "string", "minLength": 1 },
+        "mvpScope": { "type": "string", "minLength": 1 },
+        "validationSteps": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        }
+      }
+    },
+    "BestBet": {
+      "type": "object",
+      "required": ["clusterId", "opportunityId", "why"],
+      "additionalProperties": false,
+      "properties": {
+        "clusterId": { "type": "string", "minLength": 1 },
+        "opportunityId": { "type": "string", "minLength": 1 },
+        "why": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/GroundedClaim" }
+        }
+      }
+    },
+    "FeedStatus": {
+      "type": "object",
+      "required": ["id", "url", "ok"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "ok": { "type": "boolean" },
+        "itemCount": { "type": "integer", "minimum": 0 },
+        "error": { "type": "string" },
+        "fetchedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}
